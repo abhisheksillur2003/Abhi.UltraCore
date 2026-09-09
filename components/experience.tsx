@@ -1,4 +1,5 @@
 'use client';
+import { BrandMark } from '@/components/brand-mark';
 import { useEffect, useRef, useState } from 'react';
 import {
   AnimatePresence,
@@ -12,7 +13,6 @@ import {
   Check,
   Command,
   Copy,
-  Layers3,
   Moon,
   Plus,
   Sun,
@@ -163,7 +163,7 @@ export function Navigation() {
             aria-label="ABHI.UltraCore home"
             onClick={() => setOpen(false)}
           >
-            <Layers3 size={19} />
+            <BrandMark size={19} />
             <span>
               ABHI<span className="brand-light">.UltraCore</span>
             </span>
@@ -276,7 +276,7 @@ export function Intro() {
   return (
     <div className="intro" aria-hidden="true">
       <div>
-        <Layers3 size={23} />
+        <BrandMark size={23} />
         <span>ABHI.UltraCore</span>
       </div>
       <span className="intro-line" />
@@ -414,3 +414,4 @@ export function MagneticLink({
     </a>
   );
 }
+

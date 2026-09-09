@@ -1,4 +1,5 @@
-import { ArrowUpRight, Layers3, Code2, Boxes, Compass } from 'lucide-react';
+import { BrandMark } from '@/components/brand-mark';
+import { ArrowUpRight, Code2, Boxes, Compass } from 'lucide-react';
 import { Hero } from '@/components/hero';
 import {
   Navigation,
@@ -200,7 +201,7 @@ export default function Home() {
       <footer className="section-shell">
         <div className="footer-top">
           <a href="#home" className="brand">
-            <Layers3 size={20} />
+            <BrandMark size={20} />
             <span>
               ABHI<span className="brand-light">.UltraCore</span>
             </span>

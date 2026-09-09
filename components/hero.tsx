@@ -1,10 +1,10 @@
 'use client';
+import { BrandMark } from '@/components/brand-mark';
 import { Tilt, MagneticLink } from '@/components/experience';
 import {
   ArrowUpRight,
   ArrowDown,
   Terminal,
-  Layers3,
   Workflow,
 } from 'lucide-react';
 export function Hero() {
@@ -41,7 +41,7 @@ export function Hero() {
           <div className="core-orbit orbit-one" />
           <div className="core-orbit orbit-two" />
           <div className="core-chip">
-            <Layers3 size={34} />
+            <BrandMark size={34} />
             <span>UltraCore</span>
             <small>IDEA → SYSTEM</small>
           </div>
@@ -80,3 +80,4 @@ export function Hero() {
     </section>
   );
 }
+
