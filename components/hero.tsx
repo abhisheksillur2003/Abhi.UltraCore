@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <section id="home" className="hero section-shell">
       <div className="hero-eyebrow">
-        <span className="cross">✳</span>
+        <span className="cross"><BrandMark size={28} /></span>
         <span>ABHISHEK S ILLUR</span>
         <span className="hero-edition">ENGINEERING × PRODUCT</span>
       </div>
