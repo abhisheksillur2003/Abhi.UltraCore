@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Plus, Layers3, Code2, Workflow } from 'lucide-react';
+import { Plus, Code2, Workflow } from 'lucide-react';
+import { BrandMark } from '@/components/brand-mark';
 import { services } from '@/data/content';
 export function Services() {
   const [selected, setSelected] = useState<number | null>(0);
@@ -14,7 +15,7 @@ export function Services() {
           </div>
           <span />
           <div>
-            <Layers3 size={30} />
+            <BrandMark size={30} />
           </div>
           <span />
           <div>
