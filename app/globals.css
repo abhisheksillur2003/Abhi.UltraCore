@@ -522,22 +522,168 @@ svg {
   animation: theme-spin 0.35s ease;
 }
 .resume-link {
-  font-size: 11px;
   display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 10px;
-  color: var(--secondary);
+  margin-left: 4px;
 }
-.resume-link:hover {
+.resume-card {
+  --resume-glow: color-mix(in srgb, var(--accent) 28%, transparent);
+  position: relative;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 5px 6px 5px 7px;
+  color: var(--secondary);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  background:
+    linear-gradient(115deg, var(--resume-glow), transparent 46%), var(--raised);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+.resume-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    #fff2 48%,
+    transparent 72%
+  );
+  transform: translateX(-125%);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.resume-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-left: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+.resume-card:hover,
+.resume-card:focus-visible {
   color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+  transform: translateY(-1px);
+  background:
+    linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--accent) 38%, transparent),
+      transparent 50%
+    ),
+    var(--raised);
+}
+.resume-card:hover::before,
+.resume-card:focus-visible::before {
+  transform: translateX(125%);
+}
+.resume-file {
+  position: relative;
+  width: 23px;
+  height: 28px;
+  flex: 0 0 23px;
+  border: 1px solid color-mix(in srgb, var(--accent) 72%, var(--line));
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 13%, transparent);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+.resume-file-fold {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: var(--raised);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 72%, var(--line));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 72%, var(--line));
+}
+.resume-file-line {
+  position: absolute;
+  left: 5px;
+  bottom: 9px;
+  width: 11px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 48%, transparent);
+}
+.resume-file-line-short {
+  bottom: 17px;
+  width: 7px;
+  box-shadow: none;
+}
+.resume-card:hover .resume-file,
+.resume-card:focus-visible .resume-file {
+  transform: rotate(-4deg) translateY(-1px);
+  box-shadow: 4px 5px 0 color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.resume-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 70px;
+  line-height: 1;
+}
+.resume-kicker {
+  font: 8px/1.2 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.resume-title {
+  font: 600 13px/1.1 var(--font-heading);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.resume-rail {
+  position: relative;
+  width: 25px;
+  height: 28px;
+  flex: 0 0 25px;
+  display: grid;
+  place-items: center;
+  border-left: 1px solid var(--line);
+  color: var(--accent);
+}
+.resume-rail::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 4px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 17px 0 color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: transform 0.3s ease;
+}
+.resume-card .resume-rail svg {
+  margin-left: 0;
+  color: var(--accent);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.resume-card:hover .resume-rail svg,
+.resume-card:focus-visible .resume-rail svg {
+  transform: translateY(3px);
 }
 .compact {
   width: 438px;
   top: 15px;
 }
-.compact .resume-link span {
+.compact .resume-link .resume-copy {
   display: none;
+}
+.compact .resume-link {
+  gap: 5px;
+  padding-right: 4px;
 }
 .compact .command-top {
   min-height: 52px;
@@ -2300,9 +2446,10 @@ footer {
   }
   .nav-panel .mobile-resume {
     display: flex;
-    font: 12px var(--font-body);
-    padding: 18px 4px 5px;
+    margin: 14px 0 16px;
+    padding: 9px 8px;
     color: var(--secondary);
+    border-top: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
   }
   .nav-panel > a {
     padding: 12px 4px;

@@ -192,14 +192,24 @@ export function Navigation() {
             </span>
           </button>
           <a
-            className="resume-link"
+            className="resume-link resume-card"
             href="/Abhishek_Software_Engineer.pdf"
             download
             onClick={resume}
             aria-label="Download Résumé"
           >
-            <span>Résumé</span>
-            <ArrowDownToLine size={15} />
+            <span className="resume-file" aria-hidden="true">
+              <span className="resume-file-fold" />
+              <span className="resume-file-line" />
+              <span className="resume-file-line resume-file-line-short" />
+            </span>
+            <span className="resume-copy">
+              <span className="resume-kicker">PROFILE / PDF</span>
+              <span className="resume-title">Résumé</span>
+            </span>
+            <span className="resume-rail" aria-hidden="true">
+              <ArrowDownToLine size={14} />
+            </span>
           </a>
         </div>
         <AnimatePresence>
@@ -234,12 +244,24 @@ export function Navigation() {
                 </a>
               ))}
               <a
-                className="mobile-resume"
+                className="mobile-resume resume-card"
                 href="/Abhishek_Software_Engineer.pdf"
                 download
                 onClick={resume}
+                aria-label="Download Résumé"
               >
-                Download Résumé <ArrowDownToLine size={16} />
+                <span className="resume-file" aria-hidden="true">
+                  <span className="resume-file-fold" />
+                  <span className="resume-file-line" />
+                  <span className="resume-file-line resume-file-line-short" />
+                </span>
+                <span className="resume-copy">
+                  <span className="resume-kicker">PROFILE / PDF</span>
+                  <span className="resume-title">Download résumé</span>
+                </span>
+                <span className="resume-rail" aria-hidden="true">
+                  <ArrowDownToLine size={14} />
+                </span>
               </a>
             </motion.div>
           )}
@@ -414,4 +436,3 @@ export function MagneticLink({
     </a>
   );
 }
-
