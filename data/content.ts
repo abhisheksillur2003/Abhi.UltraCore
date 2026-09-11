@@ -65,18 +65,33 @@ export const skills = [
 ];
 export const certifications = [
   {
-    name: 'Java (Basics) Assessment Certificate',
+    name: 'Java (Basic) Skill Certificate',
     issuer: 'HackerRank',
-    year: '2024',
-    mark: 'H',
+    date: '07 Jan 2024',
+    preview: '/certificates/java-basic.png',
+    document: '/certificates/Abhishek-Certificates.pdf#page=1',
   },
   {
-    name: 'CSS Completion Certificate',
+    name: 'CSS Skill Certificate',
     issuer: 'HackerRank',
-    year: '2024',
-    mark: 'H',
+    date: '25 Mar 2023',
+    preview: '/certificates/css.png',
+    document: '/certificates/Abhishek-Certificates.pdf#page=2',
   },
-  { name: 'AI Skill Challenge', issuer: 'Microsoft', year: '2025', mark: 'M' },
+  {
+    name: 'Microsoft AI Skills Challenge',
+    issuer: 'Microsoft',
+    date: 'Jan 2024',
+    preview: '/certificates/microsoft-ai-skills.png',
+    document: '/certificates/Abhishek-Certificates.pdf#page=3',
+  },
+  {
+    name: 'The Fundamentals of Digital Marketing',
+    issuer: 'Google Digital Unlocked',
+    date: '20 Mar 2023',
+    preview: '/certificates/google-digital-unlocked.png',
+    document: '/certificates/Abhishek-Certificates.pdf#page=4',
+  },
 ];
 export const meetingStack = [
   'Next.js 15',

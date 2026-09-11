@@ -1,5 +1,6 @@
 import { BrandMark } from '@/components/brand-mark';
 import { ArrowUpRight, Code2, Boxes, Compass } from 'lucide-react';
+import Image from 'next/image';
 import { Hero } from '@/components/hero';
 import {
   Navigation,
@@ -144,28 +145,36 @@ export default function Home() {
           <div className="credentials">
             {certifications.map((c, i) => (
               <Reveal key={c.name} delay={i * 0.06}>
-                <div className="credential">
-                  <span
-                    className={`credential-mark ${c.mark === 'M' ? 'microsoft' : ''}`}
-                    aria-hidden="true"
-                  >
-                    {c.mark === 'M' ? (
-                      <>
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                      </>
-                    ) : (
-                      c.mark
-                    )}
+                <a
+                  className="credential"
+                  href={c.document}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${c.name} certificate`}
+                >
+                  <span className="credential-preview" aria-hidden="true">
+                    <Image
+                      src={c.preview}
+                      alt=""
+                      width={360}
+                      height={240}
+                      sizes="112px"
+                    />
                   </span>
-                  <div>
-                    <span className="credential-issuer mono">{c.issuer}</span>
-                    <h3>{c.name}</h3>
-                  </div>
-                  <span className="credential-year mono">{c.year}</span>
-                </div>
+                  <span className="credential-copy">
+                    <span className="credential-meta mono">
+                      <span>{c.issuer}</span>
+                      <span>{c.date}</span>
+                    </span>
+                    <span className="credential-title">{c.name}</span>
+                    <span className="credential-action mono">
+                      View certificate <ArrowUpRight size={13} />
+                    </span>
+                  </span>
+                  <span className="credential-index mono" aria-hidden="true">
+                    0{i + 1}
+                  </span>
+                </a>
               </Reveal>
             ))}
           </div>

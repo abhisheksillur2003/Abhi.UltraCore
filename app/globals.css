@@ -1873,52 +1873,76 @@ svg {
   margin-top: 15px;
 }
 .credential {
-  display: flex;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   border-bottom: 1px solid var(--line);
-  padding: 24px 0;
+  padding: 16px 0;
+  transition:
+    background 0.25s ease,
+    padding 0.25s ease;
 }
-.credential-mark {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  background: var(--raised);
+.credential:hover,
+.credential:focus-visible {
+  padding-inline: 10px;
+  background: linear-gradient(90deg, var(--raised), transparent 85%);
+}
+.credential-preview {
+  width: 112px;
+  aspect-ratio: 1.5;
+  overflow: hidden;
+  background: #fff;
   border: 1px solid var(--line);
-  border-radius: 7px;
-  color: var(--secondary);
-  font-size: 20px;
-  font-weight: 600;
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 12%, transparent);
 }
-.credential-mark.microsoft {
+.credential-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.credential:hover .credential-preview img,
+.credential:focus-visible .credential-preview img {
+  transform: scale(1.045);
+}
+.credential-copy {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  padding: 9px;
+  gap: 6px;
+  min-width: 0;
 }
-.credential-mark.microsoft i {
-  height: 9px;
-  width: 9px;
-  background: var(--secondary);
-}
-.credential-issuer {
+.credential-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 9px;
   color: var(--muted);
-  display: block;
-  margin-bottom: 5px;
 }
-.credential h3 {
+.credential-title {
   font-size: 14px;
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
 }
-.credential-year {
-  margin-left: auto;
+.credential-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--accent);
+}
+.credential-action svg {
+  transition: transform 0.2s ease;
+}
+.credential:hover .credential-action svg,
+.credential:focus-visible .credential-action svg {
+  transform: translate(2px, -2px);
+}
+.credential-index {
+  align-self: start;
+  padding-top: 2px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 9px;
 }
 .contact-section {
   border-top: 1px solid var(--line);
@@ -2723,24 +2747,26 @@ footer {
     gap: 25px;
   }
   .credential {
-    gap: 13px;
-    padding: 22px 0;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 12px;
+    padding: 15px 0;
   }
-  .credential h3 {
+  .credential:hover,
+  .credential:focus-visible {
+    padding-inline: 6px;
+  }
+  .credential-preview {
+    width: 82px;
+  }
+  .credential-title {
     font-size: 13px;
   }
-  .credential-issuer {
+  .credential-meta,
+  .credential-action {
     font-size: 8px;
   }
-  .credential-mark {
-    width: 34px;
-    height: 34px;
-  }
-  .credential-mark.microsoft {
-    padding: 6px;
-  }
-  .credential-year {
-    font-size: 9px;
+  .credential-index {
+    display: none;
   }
   .contact-section {
     padding: 60px 0;
