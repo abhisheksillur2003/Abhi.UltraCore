@@ -30,9 +30,11 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 120px;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body), sans-serif;
@@ -103,8 +105,9 @@ svg {
   top: 15px;
 }
 .hero {
+  position: relative;
   padding-top: 175px;
-  min-height: 850px;
+  min-height: 900px;
 }
 .hero-eyebrow {
   display: flex;
@@ -123,7 +126,7 @@ svg {
   font: 11px var(--font-mono);
 }
 .hero h1 {
-  font-size: clamp(70px, 8.8vw, 130px);
+  font-size: clamp(64px, 7.8vw, 118px);
   letter-spacing: -0.075em;
   line-height: 1.02;
   margin-top: 33px;
@@ -148,7 +151,7 @@ svg {
 .hero-bottom {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  min-height: 325px;
+  min-height: 385px;
   margin-top: 38px;
 }
 .hero-copy {
@@ -193,76 +196,234 @@ svg {
   letter-spacing: 0.04em;
 }
 .core-visual {
+  --scene-rx: -8deg;
+  --scene-ry: 12deg;
+  --glow-x: 50%;
+  --glow-y: 48%;
   position: relative;
-  min-height: 300px;
-  margin-top: -24px;
-  perspective: 900px;
+  min-height: 390px;
+  margin-top: -105px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
   isolation: isolate;
+}
+.core-visual::before {
+  content: '';
+  position: absolute;
+  inset: 2% -8% -8%;
+  z-index: -2;
+  background: radial-gradient(
+    circle at var(--glow-x) var(--glow-y),
+    color-mix(in srgb, var(--accent) 24%, transparent),
+    transparent 48%
+  );
+  filter: blur(28px);
+  transition: background 0.2s ease;
+}
+.core-visual::after {
+  content: '';
+  position: absolute;
+  inset: 8% 2% 5%;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent) 5%, transparent),
+    transparent 48%
+  );
+  clip-path: polygon(11% 0, 100% 0, 100% 85%, 88% 100%, 0 100%, 0 13%);
+  opacity: 0.7;
+}
+.scene-ambient {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 275px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 67%
+  );
+  transform: translate(-50%, -50%);
+  filter: blur(2px);
+  animation: scene-breathe 4.8s ease-in-out infinite;
 }
 .visual-grid {
   position: absolute;
-  inset: 0;
+  inset: 13% -4% -25%;
   background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 38px 38px;
-  opacity: 0.45;
-  mask-image: radial-gradient(ellipse, black, transparent 70%);
+    linear-gradient(
+      color-mix(in srgb, var(--accent) 14%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent) 14%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 34px 34px;
+  opacity: 0.7;
+  mask-image: radial-gradient(ellipse, black 12%, transparent 72%);
+  transform: rotateX(66deg) rotateZ(-7deg) translateZ(-120px);
+  transform-origin: center;
+  animation: grid-drift-3d 12s linear infinite;
+}
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--scene-rx)) rotateY(var(--scene-ry));
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .core-orbit {
   position: absolute;
-  width: 270px;
-  height: 170px;
+  left: 56%;
+  top: 42%;
   border: 1px solid var(--line);
   border-radius: 50%;
-  left: 32%;
-  top: 56px;
-  transform: rotate(-25deg);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.core-orbit::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 23%, transparent);
+  border-radius: inherit;
+}
+.core-orbit i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+}
+.core-orbit i:first-child {
+  left: 8%;
+  top: 30%;
+}
+.core-orbit i:last-child {
+  right: 10%;
+  bottom: 24%;
+}
+.orbit-one {
+  width: 330px;
+  height: 215px;
+  animation: orbit-alpha 13s linear infinite;
 }
 .orbit-two {
-  transform: rotate(35deg);
-  border-style: dashed;
+  width: 285px;
+  height: 285px;
+  border-style: dotted;
+  animation: orbit-beta 17s linear infinite reverse;
 }
-.core-chip {
+.orbit-three {
+  width: 390px;
+  height: 128px;
+  animation: orbit-gamma 10s linear infinite;
+}
+.orbit-three i {
+  left: 48%;
+  top: -4px;
+}
+.core-node {
   position: absolute;
-  top: 75px;
-  left: 47%;
-  width: 125px;
-  height: 132px;
+  left: 60%;
+  top: 30%;
+  width: 146px;
+  height: 154px;
+  transform-style: preserve-3d;
+  animation: core-float-3d 6s ease-in-out infinite;
+  z-index: 4;
+}
+.core-slab {
+  position: absolute;
+  inset: 0;
+  border-radius: 17px;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, var(--line));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--raised) 92%, var(--accent) 8%),
+    var(--surface)
+  );
+  box-shadow: 0 20px 60px color-mix(in srgb, #000 45%, transparent);
+}
+.slab-back {
+  transform: translateZ(-48px) translate(30px, 25px) rotateZ(10deg);
+  opacity: 0.38;
+}
+.slab-middle {
+  transform: translateZ(-20px) translate(16px, 13px) rotateZ(5deg);
+  opacity: 0.65;
+}
+.slab-front {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border: 1px solid #677ad0;
-  background: linear-gradient(140deg, var(--raised), var(--surface));
-  box-shadow:
-    12px 16px 0 -4px var(--bg),
-    12px 16px 0 -3px var(--line);
-  transform: rotate(-9deg);
+  transform: translateZ(24px);
   color: var(--accent);
-  border-radius: 13px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 75px color-mix(in srgb, #000 58%, transparent),
+    inset 0 0 45px color-mix(in srgb, var(--accent) 13%, transparent);
 }
-.core-chip span {
-  font: 15px var(--font-heading);
+.slab-front::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    transparent,
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    transparent 28%
+  );
+  animation: slab-sweep 7s linear infinite;
 }
-.core-chip small {
+.slab-front > * {
+  position: relative;
+  z-index: 1;
+}
+.slab-front span {
+  font: 17px var(--font-heading);
+  color: var(--text);
+}
+.slab-front small {
   font: 8px var(--font-mono);
   color: var(--muted);
 }
+.core-beam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 230px;
+  background: linear-gradient(transparent, var(--accent), transparent);
+  transform: translate(-50%, -50%) translateZ(-70px) rotateX(90deg);
+  opacity: 0.48;
+  box-shadow: 0 0 18px var(--accent);
+}
 .system-fragment {
   position: absolute;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  box-shadow: var(--shadow);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 10px;
+  box-shadow:
+    var(--shadow),
+    0 0 28px color-mix(in srgb, var(--accent) 7%, transparent);
+  backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
 }
 .fragment-code {
-  left: 0;
-  top: 24px;
-  width: 235px;
-  transform: rotate(-5deg);
+  left: -2%;
+  top: 56%;
+  width: 238px;
+  transform: translateZ(85px) rotateY(11deg) rotateZ(-5deg);
   font-size: 10px;
+  animation: panel-float-left 7s ease-in-out infinite;
 }
 .fragment-code > div {
   display: flex;
@@ -294,15 +455,61 @@ svg {
   color: var(--accent);
   font-weight: 400;
 }
+.fragment-status {
+  right: 2%;
+  top: 12%;
+  width: 145px;
+  padding: 14px;
+  transform: translateZ(52px) rotateY(-15deg) rotateZ(4deg);
+  animation: panel-float-right 5.8s ease-in-out infinite;
+}
+.fragment-status > span {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+}
+.fragment-status > strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--accent);
+  font: 13px var(--font-heading);
+  letter-spacing: 0.08em;
+}
+.fragment-status > div {
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  height: 26px;
+  margin-top: 10px;
+}
+.fragment-status i {
+  flex: 1;
+  height: 35%;
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+  animation: signal-bars 1.6s ease-in-out infinite alternate;
+}
+.fragment-status i:nth-child(2) {
+  height: 62%;
+  animation-delay: -0.4s;
+}
+.fragment-status i:nth-child(3) {
+  height: 100%;
+  animation-delay: -0.8s;
+}
+.fragment-status i:nth-child(4) {
+  height: 74%;
+  animation-delay: -1.2s;
+}
 .fragment-flow {
   display: flex;
   align-items: center;
   gap: 12px;
   right: 0;
-  top: 211px;
+  top: 78%;
   padding: 14px 18px;
   font: 10px var(--font-mono);
-  transform: rotate(3deg);
+  transform: translateZ(72px) rotateY(-10deg) rotateZ(2deg);
+  animation: panel-float-flow 6.4s ease-in-out infinite -1.5s;
 }
 .fragment-flow svg,
 .fragment-flow b {
@@ -313,10 +520,83 @@ svg {
 }
 .visual-coordinate {
   position: absolute;
-  bottom: 0;
-  right: 35px;
+  bottom: 9px;
+  right: 18px;
   font-size: 9px;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--accent) 62%, var(--muted));
+  letter-spacing: 0.08em;
+}
+@keyframes scene-breathe {
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.72;
+  }
+}
+@keyframes grid-drift-3d {
+  to {
+    background-position: 34px 34px;
+  }
+}
+@keyframes orbit-alpha {
+  from {
+    transform: translate(-50%, -50%) rotateX(68deg) rotateZ(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg);
+  }
+}
+@keyframes orbit-beta {
+  from {
+    transform: translate(-50%, -50%) rotateY(70deg) rotateZ(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(70deg) rotateZ(360deg);
+  }
+}
+@keyframes orbit-gamma {
+  from {
+    transform: translate(-50%, -50%) rotateX(18deg) rotateY(32deg) rotateZ(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(18deg) rotateY(32deg)
+      rotateZ(360deg);
+  }
+}
+@keyframes core-float-3d {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateZ(140px) rotateZ(-5deg);
+  }
+  50% {
+    transform: translate(-50%, -56%) translateZ(165px) rotateZ(3deg);
+  }
+}
+@keyframes slab-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes panel-float-left {
+  50% {
+    transform: translateZ(108px) translateY(-10px) rotateY(7deg) rotateZ(-2deg);
+  }
+}
+@keyframes panel-float-right {
+  50% {
+    transform: translateZ(76px) translateY(9px) rotateY(-9deg) rotateZ(1deg);
+  }
+}
+@keyframes panel-float-flow {
+  50% {
+    transform: translateZ(94px) translate(-8px, -8px) rotateY(-5deg)
+      rotateZ(-1deg);
+  }
+}
+@keyframes signal-bars {
+  to {
+    filter: brightness(1.7);
+    transform: scaleY(0.55);
+  }
 }
 .hero-baseline {
   display: flex;
@@ -341,23 +621,45 @@ svg {
     width: calc(100% - 56px);
   }
   .hero h1 {
-    font-size: 9.8vw;
+    font-size: clamp(48px, 6.8vw, 60px);
   }
   .hero-bottom {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
   }
+  .core-visual {
+    min-height: 365px;
+    margin-top: -95px;
+  }
   .fragment-code {
-    width: 190px;
+    left: -5%;
+    top: 58%;
+    width: 180px;
     font-size: 8px;
   }
-  .core-chip {
-    left: 42%;
-    width: 105px;
-  }
+  .core-node,
   .core-orbit {
-    left: 10%;
-    width: 220px;
+    left: 42%;
+  }
+  .core-node {
+    top: 28%;
+    width: 126px;
+    height: 134px;
+  }
+  .orbit-one {
+    width: 280px;
+    height: 180px;
+  }
+  .orbit-two {
+    width: 238px;
+    height: 238px;
+  }
+  .orbit-three {
+    width: 326px;
+    height: 106px;
+  }
+  .fragment-status {
+    display: none;
   }
   .fragment-flow {
     font-size: 8px;
@@ -402,19 +704,60 @@ svg {
     font-size: 9px;
   }
   .core-visual {
-    min-height: 250px;
-    margin-top: 5px;
+    min-height: 340px;
+    margin-top: 10px;
+    perspective: 1050px;
+  }
+  .hero-scene {
+    transform: rotateX(-7deg) rotateY(7deg) scale(0.88);
   }
   .fragment-code {
-    width: 210px;
-    font-size: 9px;
+    left: -5%;
+    top: 58%;
+    width: 172px;
+    font-size: 7px;
   }
-  .core-chip {
-    left: 54%;
-    top: 65px;
+  .fragment-code code {
+    padding: 10px;
+  }
+  .core-node,
+  .core-orbit {
+    left: 57%;
+  }
+  .core-node {
+    top: 28%;
+  }
+  .core-orbit {
+    top: 44%;
+  }
+  .core-node {
+    width: 112px;
+    height: 120px;
+  }
+  .slab-front span {
+    font-size: 14px;
+  }
+  .orbit-one {
+    width: 236px;
+    height: 150px;
+  }
+  .orbit-two {
+    width: 198px;
+    height: 198px;
+  }
+  .orbit-three {
+    width: 276px;
+    height: 92px;
+  }
+  .fragment-status {
+    display: none;
   }
   .fragment-flow {
-    top: 190px;
+    right: -2%;
+    top: 76%;
+    max-width: 210px;
+    padding: 10px;
+    font-size: 7px;
   }
   .visual-coordinate {
     display: none;
@@ -2123,10 +2466,10 @@ footer {
   animation: intro-in 0.6s ease;
 }
 .core-visual .orbit-one {
-  animation: orbit-drift 15s ease-in-out infinite;
+  animation: orbit-alpha 13s linear infinite;
 }
 .core-visual .fragment-code {
-  animation: code-float 8s ease-in-out infinite;
+  animation: panel-float-left 7s ease-in-out infinite;
 }
 .hero h1 {
   animation: hero-in 0.8s 0.15s both;
@@ -2841,10 +3184,6 @@ footer {
   }
   .tilt {
     transform: none !important;
-  }
-  .core-visual .fragment-code,
-  .core-visual .orbit-one {
-    animation: none;
   }
 }
 @media (pointer: coarse) {
