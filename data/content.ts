@@ -53,6 +53,7 @@ export const services = [
   },
 ];
 export const skills = [
+  'JAVA',
   'JavaScript',
   'React',
   'Python',

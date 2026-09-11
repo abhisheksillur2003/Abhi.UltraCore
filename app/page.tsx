@@ -114,22 +114,30 @@ export default function Home() {
             className="skills-rail"
             tabIndex={0}
             role="region"
-            aria-label="Technology skills, scroll horizontally to see all"
+            aria-label="Technology skills moving horizontally; hover or focus to pause"
           >
-            <div className="skills-track">
-              {skills.map((skill, i) => (
-                <span key={skill}>
-                  <small className="mono">
-                    {String(i + 1).padStart(2, '0')}
-                  </small>
-                  {skill}
-                  <i>✳</i>
-                </span>
+            <div className="skills-marquee">
+              {[false, true].map((duplicate) => (
+                <div
+                  className="skills-track"
+                  key={duplicate ? 'skills-copy' : 'skills-primary'}
+                  aria-hidden={duplicate || undefined}
+                >
+                  {skills.map((skill, i) => (
+                    <span key={`${duplicate ? 'copy' : 'primary'}-${skill}`}>
+                      <small className="mono">
+                        {String(i + 1).padStart(2, '0')}
+                      </small>
+                      {skill}
+                      <i>✳</i>
+                    </span>
+                  ))}
+                </div>
               ))}
             </div>
           </div>
           <p className="skills-hint mono section-shell">
-            EXPLORE THE TOOLKIT ↔
+            IN CONTINUOUS MOTION · HOVER TO PAUSE
           </p>
         </section>
         <section
