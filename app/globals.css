@@ -1852,12 +1852,8 @@ svg {
 .skills-marquee {
   display: flex;
   width: max-content;
-  animation: skills-loop 34s linear infinite;
+  animation: skills-loop 28s linear infinite;
   will-change: transform;
-}
-.skills-rail:hover .skills-marquee,
-.skills-rail:focus-visible .skills-marquee {
-  animation-play-state: paused;
 }
 .skills-track {
   display: flex;
@@ -2890,6 +2886,12 @@ footer {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+  .skills-marquee {
+    animation: skills-loop 28s linear infinite !important;
+  }
+  .skills-rail::after {
+    animation: skills-scan 5.5s ease-in-out infinite !important;
   }
 }
 @media (max-width: 600px) {

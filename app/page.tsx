@@ -114,7 +114,7 @@ export default function Home() {
             className="skills-rail"
             tabIndex={0}
             role="region"
-            aria-label="Technology skills moving horizontally; hover or focus to pause"
+            aria-label="Technology skills moving continuously in a horizontal loop"
           >
             <div className="skills-marquee">
               {[false, true].map((duplicate) => (
@@ -137,7 +137,7 @@ export default function Home() {
             </div>
           </div>
           <p className="skills-hint mono section-shell">
-            IN CONTINUOUS MOTION · HOVER TO PAUSE
+            IN CONTINUOUS MOTION · ALWAYS BUILDING
           </p>
         </section>
         <section

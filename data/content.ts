@@ -60,7 +60,6 @@ export const skills = [
   'Next.js',
   'TypeScript',
   'Supabase',
-  'Stripe',
   'Automation Tools',
   'SaaS Development',
 ];
