@@ -149,6 +149,25 @@ export function Navigation() {
       );
     }
   }
+  function navigateToSection(section: string) {
+    const id = section.toLowerCase();
+    const target = document.getElementById(id);
+    if (!target) return;
+    setOpen(false);
+    if (window.location.hash !== `#${id}`) {
+      window.history.pushState(null, '', `#${id}`);
+    }
+    target.focus({ preventScroll: true });
+    requestAnimationFrame(() => {
+      const navOffset = compact ? 86 : 110;
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - navOffset,
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto'
+          : 'smooth',
+      });
+    });
+  }
   return (
     <>
       <nav
@@ -171,10 +190,11 @@ export function Navigation() {
           <span className="nav-divider" />
           <button
             ref={buttonRef}
+            type="button"
             className="index-button"
             aria-expanded={open}
             aria-controls="section-index"
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen((current) => !current)}
           >
             <span className="active-dot" />
             <span>
@@ -231,11 +251,9 @@ export function Navigation() {
                   key={section}
                   href={`#${section.toLowerCase()}`}
                   aria-current={active === section ? 'location' : undefined}
-                  onClick={() => {
-                    setOpen(false);
-                    document
-                      .getElementById(section.toLowerCase())
-                      ?.focus({ preventScroll: true });
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigateToSection(section);
                   }}
                 >
                   <span className="mono">0{i + 1}</span>
@@ -280,6 +298,7 @@ export function Navigation() {
       </nav>
       {open && (
         <button
+          type="button"
           className="nav-backdrop"
           aria-label="Close navigation"
           tabIndex={-1}
