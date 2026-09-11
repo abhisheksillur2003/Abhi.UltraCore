@@ -136,9 +136,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <p className="skills-hint mono section-shell">
-            IN CONTINUOUS MOTION · ALWAYS BUILDING
-          </p>
         </section>
         <section
           id="certifications"

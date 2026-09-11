@@ -1820,7 +1820,7 @@ svg {
 .skills-rail {
   position: relative;
   overflow: hidden;
-  padding: 40px 0 20px;
+  padding: 40px 0 32px;
   mask-image: linear-gradient(
     90deg,
     transparent,
@@ -1847,12 +1847,13 @@ svg {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
-  animation: skills-scan 5.5s ease-in-out infinite;
+  animation: skills-scan 4.5s linear infinite !important;
 }
 .skills-marquee {
   display: flex;
   width: max-content;
-  animation: skills-loop 28s linear infinite;
+  animation: skills-loop 28s linear infinite !important;
+  animation-play-state: running !important;
   will-change: transform;
 }
 .skills-track {
@@ -1860,7 +1861,7 @@ svg {
   flex: none;
   width: max-content;
   gap: 32px;
-  padding: 0 max(56px, calc((100vw - 1280px) / 2));
+  padding: 0 32px 0 0;
 }
 .skills-track > span {
   display: flex;
@@ -1883,19 +1884,13 @@ svg {
   color: var(--line);
   margin-left: 20px;
 }
-.skills-hint {
-  font-size: 8px;
-  color: var(--muted);
-  margin-top: 10px;
-}
 @keyframes skills-loop {
   to {
     transform: translateX(-50%);
   }
 }
 @keyframes skills-scan {
-  50%,
-  100% {
+  to {
     left: 100%;
   }
 }
@@ -2212,6 +2207,7 @@ footer {
 @media (min-width: 1450px) {
   .skills-track {
     gap: 29px;
+    padding-right: 29px;
   }
   .skills-track > span {
     font-size: 27px;
@@ -2769,8 +2765,8 @@ footer {
     margin-top: 15px;
   }
   .skills-track {
-    padding: 0 20px;
     gap: 23px;
+    padding-right: 23px;
   }
   .skills-track > span {
     font-size: 26px;
@@ -2781,9 +2777,6 @@ footer {
   }
   .skills-rail {
     padding-top: 25px;
-  }
-  .skills-hint {
-    font-size: 7px;
   }
   .certifications-section {
     padding: 70px 0;
@@ -2889,9 +2882,10 @@ footer {
   }
   .skills-marquee {
     animation: skills-loop 28s linear infinite !important;
+    animation-play-state: running !important;
   }
   .skills-rail::after {
-    animation: skills-scan 5.5s ease-in-out infinite !important;
+    animation: skills-scan 4.5s linear infinite !important;
   }
 }
 @media (max-width: 600px) {
