@@ -69,28 +69,28 @@ export const certifications = [
     issuer: 'HackerRank',
     date: '07 Jan 2024',
     preview: '/certificates/java-basic.png',
-    document: '/certificates/Abhishek-Certificates.pdf#page=1',
+    document: '/certificates/java-basic-certificate.pdf',
   },
   {
     name: 'CSS Skill Certificate',
     issuer: 'HackerRank',
     date: '25 Mar 2023',
     preview: '/certificates/css.png',
-    document: '/certificates/Abhishek-Certificates.pdf#page=2',
+    document: '/certificates/css-certificate.pdf',
   },
   {
     name: 'Microsoft AI Skills Challenge',
     issuer: 'Microsoft',
     date: 'Jan 2024',
     preview: '/certificates/microsoft-ai-skills.png',
-    document: '/certificates/Abhishek-Certificates.pdf#page=3',
+    document: '/certificates/microsoft-ai-skills-challenge.pdf',
   },
   {
     name: 'The Fundamentals of Digital Marketing',
     issuer: 'Google Digital Unlocked',
     date: '20 Mar 2023',
     preview: '/certificates/google-digital-unlocked.png',
-    document: '/certificates/Abhishek-Certificates.pdf#page=4',
+    document: '/certificates/google-digital-unlocked.pdf',
   },
 ];
 export const meetingStack = [
