@@ -52,6 +52,7 @@ export function Navigation() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const pendingSectionRef = useRef<string | null>(null);
   const [resumeMessage, setResumeMessage] = useState('');
   useEffect(() => {
     // Synchronize the pre-paint document theme with the hydrated control.
@@ -123,6 +124,30 @@ export function Navigation() {
       localStorage.setItem('ultracore-theme', next);
     } catch {}
   }
+  function navigateToSection(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    section: string,
+  ) {
+    event.preventDefault();
+    pendingSectionRef.current = section.toLowerCase();
+    setOpen(false);
+  }
+  function completeSectionNavigation() {
+    const id = pendingSectionRef.current;
+    if (!id) return;
+    pendingSectionRef.current = null;
+
+    const target = document.getElementById(id);
+    if (!target) return;
+    window.history.pushState(null, '', `#${id}`);
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth',
+      block: 'start',
+    });
+  }
   async function resume(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     try {
@@ -148,25 +173,6 @@ export function Navigation() {
         'Unable to download. Please email me to request a copy.',
       );
     }
-  }
-  function navigateToSection(section: string) {
-    const id = section.toLowerCase();
-    const target = document.getElementById(id);
-    if (!target) return;
-    setOpen(false);
-    if (window.location.hash !== `#${id}`) {
-      window.history.pushState(null, '', `#${id}`);
-    }
-    target.focus({ preventScroll: true });
-    requestAnimationFrame(() => {
-      const navOffset = compact ? 86 : 110;
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - navOffset,
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'auto'
-          : 'smooth',
-      });
-    });
   }
   return (
     <>
@@ -232,7 +238,7 @@ export function Navigation() {
             </span>
           </a>
         </div>
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={completeSectionNavigation}>
           {open && (
             <motion.div
               id="section-index"
@@ -251,10 +257,7 @@ export function Navigation() {
                   key={section}
                   href={`#${section.toLowerCase()}`}
                   aria-current={active === section ? 'location' : undefined}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    navigateToSection(section);
-                  }}
+                  onClick={(event) => navigateToSection(event, section)}
                 >
                   <span className="mono">0{i + 1}</span>
                   <span>{section}</span>
