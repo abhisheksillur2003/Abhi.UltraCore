@@ -1,4 +1,5 @@
 export const email = 'abhisheksillur2003@gmail.com';
+export const contactHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent('Portfolio enquiry')}`;
 export const sections = [
   'About',
   'Services',

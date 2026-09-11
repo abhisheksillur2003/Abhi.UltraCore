@@ -1,17 +1,15 @@
 'use client';
 import { BrandMark } from '@/components/brand-mark';
 import { Tilt, MagneticLink } from '@/components/experience';
-import {
-  ArrowUpRight,
-  ArrowDown,
-  Terminal,
-  Workflow,
-} from 'lucide-react';
+import { contactHref } from '@/data/content';
+import { ArrowUpRight, ArrowDown, Terminal, Workflow } from 'lucide-react';
 export function Hero() {
   return (
     <section id="home" className="hero section-shell">
       <div className="hero-eyebrow">
-        <span className="cross"><BrandMark size={28} /></span>
+        <span className="cross">
+          <BrandMark size={28} />
+        </span>
         <span>ABHISHEK S ILLUR</span>
         <span className="hero-edition">ENGINEERING × PRODUCT</span>
       </div>
@@ -29,7 +27,7 @@ export function Hero() {
             Full-Stack Software Engineer building scalable SaaS products and
             modern web applications.
           </p>
-          <MagneticLink href="mailto:abhisheksillur2003@gmail.com">
+          <MagneticLink href={contactHref}>
             Contact Me <ArrowUpRight size={19} />
           </MagneticLink>
           <span className="hero-note mono">
@@ -80,4 +78,3 @@ export function Hero() {
     </section>
   );
 }
-

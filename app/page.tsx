@@ -13,7 +13,7 @@ import {
 } from '@/components/experience';
 import { Services } from '@/components/services';
 import { Projects } from '@/components/projects';
-import { certifications, skills, email } from '@/data/content';
+import { certifications, contactHref, skills, email } from '@/data/content';
 function SectionHeading({
   number,
   label,
@@ -185,7 +185,7 @@ export default function Home() {
               <div className="contact-bottom">
                 <div>
                   <p>A product, a collaboration, or the next chapter.</p>
-                  <MagneticLink href={`mailto:${email}`}>
+                  <MagneticLink href={contactHref}>
                     Contact Me <ArrowUpRight size={20} />
                   </MagneticLink>
                 </div>

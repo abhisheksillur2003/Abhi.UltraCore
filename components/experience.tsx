@@ -418,9 +418,12 @@ export function MagneticLink({
   href: string;
 }) {
   const reduced = useReducedMotion();
+  const opensNewTab = href.startsWith('http');
   return (
     <a
       href={href}
+      target={opensNewTab ? '_blank' : undefined}
+      rel={opensNewTab ? 'noreferrer' : undefined}
       className="primary-button"
       onPointerMove={(e) => {
         if (reduced || e.pointerType !== 'mouse') return;
