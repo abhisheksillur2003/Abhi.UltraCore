@@ -51,9 +51,14 @@ export function Hero() {
             Full-Stack Software Engineer building scalable SaaS products and
             modern web applications.
           </p>
-          <MagneticLink href={contactHref}>
-            Contact Me <ArrowUpRight size={19} />
-          </MagneticLink>
+          <div className="hero-actions">
+            <MagneticLink href={contactHref}>
+              Contact Me <ArrowUpRight size={19} />
+            </MagneticLink>
+            <a className="secondary-button" href="#projects">
+              View projects <ArrowDown size={16} />
+            </a>
+          </div>
           <span className="hero-note mono">
             THOUGHTFULLY DESIGNED. BUILT TO WORK.
           </span>

@@ -188,6 +188,45 @@ svg {
 .primary-button:hover svg {
   transform: translate(3px, -3px);
 }
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.hero-actions .primary-button {
+  margin-top: 0;
+}
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--secondary);
+  font-size: 14px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+.secondary-button:hover,
+.secondary-button:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.secondary-button svg {
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+.secondary-button:hover svg,
+.secondary-button:focus-visible svg {
+  transform: translateY(3px);
+}
 .hero-note {
   display: block;
   color: var(--muted);
@@ -1230,6 +1269,127 @@ svg {
 }
 .about-identities svg {
   color: var(--accent);
+}
+.experience-section {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+  padding-top: 115px;
+}
+.experience-section .section-heading {
+  margin-bottom: 0;
+}
+.experience-section h2 {
+  font-size: 42px;
+}
+.experience-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 9%, transparent),
+      transparent 46%
+    ),
+    var(--surface);
+  box-shadow: 14px 14px 0 color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.experience-card::after {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -80px;
+  top: -90px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.experience-card-top,
+.experience-heading,
+.experience-highlights,
+.experience-link {
+  position: relative;
+  z-index: 1;
+}
+.experience-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+.experience-role {
+  color: var(--accent);
+  font-size: 11px;
+}
+.experience-status {
+  color: var(--muted);
+  font-size: 10px;
+}
+.experience-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 30px;
+}
+.experience-heading h3 {
+  font-size: 31px;
+  letter-spacing: -0.04em;
+}
+.experience-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.experience-summary {
+  max-width: 650px;
+  margin-top: 17px;
+  color: var(--secondary);
+  font-size: 15px;
+}
+.experience-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 28px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.experience-highlights > span {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.experience-highlights svg {
+  grid-row: span 2;
+  color: var(--accent);
+}
+.experience-highlights strong {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+.experience-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 25px;
+  color: var(--accent);
+  font-size: 11px;
+}
+.experience-link svg {
+  transition: transform 0.2s ease;
+}
+.experience-link:hover svg,
+.experience-link:focus-visible svg {
+  transform: translate(2px, -2px);
 }
 .services-layout {
   display: grid;
@@ -2296,7 +2456,7 @@ svg {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
 }
 .credential-title {
@@ -2309,7 +2469,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--accent);
 }
 .credential-action svg {
@@ -2409,6 +2569,24 @@ svg {
 .copy-email:hover {
   color: var(--accent);
 }
+.contact-utilities {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 35px;
+  color: var(--muted);
+  font-size: 11px;
+  transition: color 0.2s ease;
+}
+.linkedin-link:hover,
+.linkedin-link:focus-visible {
+  color: var(--accent);
+}
 footer {
   padding: 40px 0 20px;
 }
@@ -2421,6 +2599,23 @@ footer {
 .footer-top > p {
   font-size: 11px;
   color: var(--muted);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--accent);
 }
 .footer-top > a:last-child {
   font-size: 10px;
@@ -2560,6 +2755,12 @@ footer {
   .about-section {
     gap: 45px;
   }
+  .experience-section {
+    gap: 45px;
+  }
+  .experience-section h2 {
+    font-size: 35px;
+  }
   .about-section h2,
   .certifications-section h2 {
     font-size: 35px;
@@ -2633,6 +2834,14 @@ footer {
   .about-identities {
     justify-content: flex-start;
     gap: 35px;
+  }
+  .experience-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 90px;
+  }
+  .experience-card {
+    max-width: 680px;
   }
   .standard-section {
     padding-top: 95px;
@@ -2891,6 +3100,44 @@ footer {
   .about-identities svg {
     width: 15px;
   }
+  .experience-section {
+    padding-top: 75px;
+  }
+  .experience-section h2 {
+    font-size: 32px;
+  }
+  .experience-card {
+    padding: 22px 18px;
+    box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent) 7%, transparent);
+  }
+  .experience-heading {
+    display: block;
+    margin-top: 24px;
+  }
+  .experience-heading h3 {
+    font-size: 27px;
+  }
+  .experience-heading p {
+    margin-top: 2px;
+  }
+  .experience-summary {
+    font-size: 14px;
+  }
+  .experience-highlights {
+    grid-template-columns: 1fr;
+    margin-top: 23px;
+  }
+  .experience-highlights > span {
+    grid-template-columns: auto auto 1fr;
+    padding: 13px 14px;
+    font-size: 11px;
+  }
+  .experience-highlights svg {
+    grid-row: auto;
+  }
+  .experience-highlights strong {
+    font-size: 13px;
+  }
   .standard-section {
     padding-top: 80px;
   }
@@ -3142,7 +3389,7 @@ footer {
   }
   .credential-meta,
   .credential-action {
-    font-size: 8px;
+    font-size: 10px;
   }
   .credential-index {
     display: none;
@@ -3163,6 +3410,10 @@ footer {
     font-size: 16px;
     overflow-wrap: anywhere;
   }
+  .contact-utilities {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
   .copy-email {
     min-height: 35px;
   }
@@ -3178,6 +3429,9 @@ footer {
   }
   .footer-top .brand {
     font-size: 15px;
+  }
+  .footer-links {
+    margin-top: 14px;
   }
   .custom-cursor {
     display: none;

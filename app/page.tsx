@@ -1,5 +1,14 @@
 import { BrandMark } from '@/components/brand-mark';
-import { ArrowUpRight, Code2, Boxes, Compass } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Code2,
+  Boxes,
+  Compass,
+  UserRound,
+  UsersRound,
+  Braces,
+  MapPin,
+} from 'lucide-react';
 import Image from 'next/image';
 import { Hero } from '@/components/hero';
 import {
@@ -14,7 +23,13 @@ import {
 } from '@/components/experience';
 import { Services } from '@/components/services';
 import { Projects } from '@/components/projects';
-import { certifications, contactHref, skills, email } from '@/data/content';
+import {
+  certifications,
+  contactHref,
+  skills,
+  email,
+  linkedinHref,
+} from '@/data/content';
 function SectionHeading({
   number,
   label,
@@ -75,11 +90,67 @@ export default function Home() {
           </Reveal>
         </section>
         <section
+          id="experience"
+          tabIndex={-1}
+          className="section-shell experience-section"
+        >
+          <SectionHeading number="02" label="EXPERIENCE">
+            Teaching code.
+            <br />
+            <span>Strengthening foundations.</span>
+          </SectionHeading>
+          <Reveal className="experience-card">
+            <div className="experience-card-top">
+              <span className="experience-role mono">
+                TEACHING ASSISTANT INTERN
+              </span>
+              <span className="experience-status mono">REMOTE</span>
+            </div>
+            <div className="experience-heading">
+              <h3>Jainemo Pvt. Ltd.</h3>
+              <p>at Apna College</p>
+            </div>
+            <p className="experience-summary">
+              Guided students through Data Structures and Algorithms in Java,
+              turning difficult concepts and debugging problems into practical,
+              repeatable ways of thinking.
+            </p>
+            <div
+              className="experience-highlights"
+              aria-label="Experience highlights"
+            >
+              <span>
+                <UsersRound size={17} />
+                <strong>150–200</strong>
+                students supported
+              </span>
+              <span>
+                <Braces size={17} />
+                <strong>Java + DSA</strong>
+                guided practice
+              </span>
+              <span>
+                <MapPin size={17} />
+                <strong>Remote</strong>
+                collaboration
+              </span>
+            </div>
+            <a
+              className="experience-link mono"
+              href={linkedinHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View LinkedIn profile <ArrowUpRight size={14} />
+            </a>
+          </Reveal>
+        </section>
+        <section
           id="services"
           tabIndex={-1}
           className="section-shell standard-section"
         >
-          <SectionHeading number="02" label="SERVICES">
+          <SectionHeading number="03" label="SERVICES">
             Built end to end.
             <br />
             <span>Considered at every layer.</span>
@@ -93,7 +164,7 @@ export default function Home() {
           tabIndex={-1}
           className="section-shell standard-section projects-section"
         >
-          <SectionHeading number="03" label="SELECTED PROJECTS">
+          <SectionHeading number="04" label="SELECTED PROJECTS">
             The thinking.
             <br />
             <span>The building. The work.</span>
@@ -104,7 +175,7 @@ export default function Home() {
           <div className="section-shell">
             <Reveal className="skills-heading">
               <span className="section-label mono">
-                <span>04</span> / SKILLS
+                <span>05</span> / SKILLS
               </span>
               <h2>The tools behind the thinking.</h2>
               <span className="mono">A CONNECTED TOOLKIT</span>
@@ -142,7 +213,7 @@ export default function Home() {
           tabIndex={-1}
           className="section-shell certifications-section"
         >
-          <SectionHeading number="05" label="CERTIFICATIONS">
+          <SectionHeading number="06" label="CERTIFICATIONS">
             Always building.
             <br />
             <span>Always learning.</span>
@@ -188,7 +259,7 @@ export default function Home() {
           <div className="section-shell">
             <Reveal>
               <span className="section-label mono">
-                <span>06</span> / LET’S CONNECT
+                <span>07</span> / LET’S CONNECT
               </span>
               <h2>
                 Have something
@@ -205,7 +276,18 @@ export default function Home() {
                 </div>
                 <div className="contact-email">
                   <a href={`mailto:${email}`}>{email}</a>
-                  <CopyEmail />
+                  <div className="contact-utilities">
+                    <CopyEmail />
+                    <a
+                      className="linkedin-link"
+                      href={linkedinHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <UserRound size={14} /> LinkedIn{' '}
+                      <ArrowUpRight size={12} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -221,7 +303,12 @@ export default function Home() {
             </span>
           </a>
           <p>Built with intent. Engineered for impact.</p>
-          <a href={`mailto:${email}`}>{email}</a>
+          <div className="footer-links">
+            <a href={`mailto:${email}`}>Email</a>
+            <a href={linkedinHref} target="_blank" rel="noreferrer">
+              LinkedIn <ArrowUpRight size={12} />
+            </a>
+          </div>
         </div>
         <div className="footer-bottom mono">
           <span>
