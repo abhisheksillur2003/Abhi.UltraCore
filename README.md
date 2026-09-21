@@ -4,10 +4,6 @@ An interactive portfolio for **Abhishek S Illur**, a full-stack software enginee
 
 ![ABHI.UltraCore portfolio preview](public/og.png)
 
-## Live site
-
-[Open ABHI.UltraCore](https://abhi-ultracore.nagashree143.chatgpt.site/)
-
 ## Highlights
 
 - Interactive 3D hero scene with pointer-responsive depth
@@ -42,8 +38,6 @@ cd Abhi.UltraCore
 npm ci
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available commands
 
