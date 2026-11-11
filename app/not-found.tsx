@@ -1,20 +1,15 @@
-import { BrandMark } from '@/components/brand-mark';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 export default function NotFound() {
   return (
-    <main className="not-found" id="main-content">
-      <Link href="/" className="brand">
-        <BrandMark size={23} />
-        ABHI.UltraCore
-      </Link>
-      <span className="mono">ROUTE RESOLUTION / NOT FOUND</span>
-      <h1>
-        404<span>.</span>
-      </h1>
-      <h2>This route doesn’t exist in the system.</h2>
-      <Link className="primary-button" href="/">
-        Back to Home <ArrowUpRight size={18} />
+    <main id="main-content" className="shell legal">
+      <p className="eyebrow">PAGE NOT FOUND</p>
+      <h1>This page isn’t here.</h1>
+      <p>
+        Return to the portfolio to explore projects, experience, and contact
+        details.
+      </p>
+      <Link className="button" href="/">
+        Back to portfolio
       </Link>
     </main>
   );
